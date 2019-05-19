@@ -1,9 +1,7 @@
 <template lang="pug">
   div.page.d-flex.align-center.content-center
     div.profile-card.d-flex.column.align-center.content-center
-      avatar(:imagePath="`${staticImgBasePath}/${profile.avatar}`")
-      h3.name {{profile.lastname}} {{profile.firstname}}
-      div Age: {{profile.age}}
+      h1 Hello {{profile.firstname}}
 </template>
 
 <script>

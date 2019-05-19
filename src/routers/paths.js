@@ -17,5 +17,10 @@ export default [{
     path: '/profile',
     name: 'profile',
     component: 'Profile'
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: 'Users'
   }
 ]

@@ -55,7 +55,9 @@ export default {
       if (createProfile) {
         localStorage.setItem('uid', createProfile.user.uid);
 
-        await firebase.firestore().collection("users").doc(createProfile.user.uid).set(payload).catch(err => {
+        await firebase.firestore().collection("users").doc(createProfile.user.uid).set({
+          email: payload.email
+        }).catch(err => {
           console.log(err);
           return;
         });
@@ -99,7 +101,7 @@ export default {
     async updateProfile({
       commit
     }, payload) {
-      const response = await firebase.firestore().collection('users').doc(localStorage.getItem('uid')).set(payload, {
+      await firebase.firestore().collection('users').doc(localStorage.getItem('uid')).set(payload, {
         merge: true
       });
     }

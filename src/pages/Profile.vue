@@ -1,5 +1,5 @@
 <template lang="pug">
-  div {{profile}}
+  div
     div.d-flex.column.align-start
       input(type="text" placeholder="Firstname" v-model="profile.firstname")
       input(type="text" placeholder="Lastname" v-model="profile.lastname")

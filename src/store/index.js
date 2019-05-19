@@ -3,10 +3,12 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import profile from './profile'
+import profile from './profile';
+import users from './users';
 
 export const store = new Vuex.Store({
   modules: {
-    profile
+    profile,
+    users
   }
 });

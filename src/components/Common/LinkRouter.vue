@@ -21,10 +21,11 @@ export default {
 
 <style lang="sass">
 .link
+  margin: 0 20px
+  cursor: pointer
   a
     font-size: 18px
     height: 100%
-    margin: 0 20px
     text-align: center
 .dark.link
   a

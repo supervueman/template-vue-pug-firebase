@@ -11,7 +11,7 @@
 <script>
 import config from "@/config";
 export default {
-  name: "app",
+  name: "App",
   data() {
     return {
       staticImgBasePath: config.staticImgBasePath

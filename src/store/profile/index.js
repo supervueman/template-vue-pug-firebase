@@ -1,9 +1,12 @@
-const profile = {
+import * as firebase from 'firebase';
+
+const defaultProfile = {
   firstname: 'Rinat',
   lastname: 'Davlikamov',
   nickname: 'supervueman',
   age: 28,
-  avatar: 'avatar.jpg'
+  avatar: 'avatar.jpg',
+  email: ''
 }
 
 export default {
@@ -20,7 +23,45 @@ export default {
     async fetchProfile({
       commit
     }) {
-      commit('setProfile', profile);
+      firebase.firestore().collection("users").doc(localStorage.getItem('uid')).get().then(doc => {
+        console.log(doc.data())
+      }).catch(err => {
+        console.log(err);
+      });
+      // console.log(profile, '____Profile')
+      // commit('setProfile', profile);
+    },
+    async signUp({
+      commit
+    }, payload) {
+      const createProfile = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password).catch(err => {
+        console.error(err);
+        return;
+      });
+
+      if (createProfile) {
+        localStorage.setItem('uid', createProfile.user.uid);
+
+        const profile = await firebase.firestore().collection("users").add(payload).catch(err => {
+          console.log(err);
+          return;
+        });
+
+        commit('setProfile', profile);
+      }
+    },
+
+    async signIn({
+      commit
+    }, payload) {
+      const profile = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(err => {
+        console.error(err);
+      });
+
+      console.log(profile)
+
+      localStorage.setItem('uid', profile.uid);
+      // commit('setProfile', profile);
     }
   },
   getters: {

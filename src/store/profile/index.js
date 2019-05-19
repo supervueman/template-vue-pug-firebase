@@ -1,14 +1,5 @@
 import * as firebase from 'firebase';
 
-const defaultProfile = {
-  firstname: 'Rinat',
-  lastname: 'Davlikamov',
-  nickname: 'supervueman',
-  age: 28,
-  avatar: 'avatar.jpg',
-  email: ''
-}
-
 export default {
   namespaced: true,
   state: {
@@ -29,14 +20,19 @@ export default {
     async fetchProfile({
       commit
     }) {
-      const profile = await firebase.firestore().collection("users").doc(localStorage.getItem('uid')).get().catch(err => {
-        console.log(err);
-      });
+      const uid = localStorage.getItem('uid');
+      const isUid = uid !== undefined && uid !== null && uid !== '';
 
-      if (profile) {
-        const curProfile = profile.data();
-        curProfile.id = profile.id;
-        commit('setProfile', curProfile);
+      if (isUid) {
+        const profile = await firebase.firestore().collection("users").doc(uid).get().catch(err => {
+          console.error(err);
+        });
+
+        if (profile) {
+          const curProfile = profile.data();
+          curProfile.id = profile.id;
+          commit('setProfile', curProfile);
+        }
       }
     },
 
@@ -90,6 +86,7 @@ export default {
       commit
     }) {
       await firebase.auth().signOut();
+      localStorage.removeItem('uid');
       commit('setProfile', {});
     }
   },

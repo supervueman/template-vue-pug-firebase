@@ -6,7 +6,6 @@
       :profileId="profile.id"
     )
     router-view
-    div {{profile}}
 </template>
 
 <script>

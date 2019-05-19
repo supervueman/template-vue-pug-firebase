@@ -1,6 +1,7 @@
 <template lang="pug">
   header.toolbar.d-flex.content-end
-    div.toolbar-menu.d-flex.content-center.align-center(
+    router-link.toolbar-menu.d-flex.content-center.align-center(
+      to="/profile"
       v-if="profileId !== undefined && profileId !== ''"
     )
       avatar(:imagePath="avatarPath")
@@ -22,7 +23,8 @@
 export default {
   props: {
     profileId: {
-      type: String
+      type: String,
+      default: undefined
     },
     firstname: {
       type: String,

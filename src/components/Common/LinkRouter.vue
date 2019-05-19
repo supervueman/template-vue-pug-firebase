@@ -12,7 +12,8 @@ export default {
       default: "/"
     },
     text: {
-      type: String
+      type: String,
+      default: "Link"
     }
   }
 };

@@ -62,6 +62,8 @@ export default {
           console.log(err);
           return;
         });
+
+        await this.dispatch('profile/fetchProfile');
       }
     },
 
@@ -76,6 +78,13 @@ export default {
 
       localStorage.setItem('uid', profile.uid);
       // commit('setProfile', profile);
+    },
+
+    async logout({
+      commit
+    }) {
+      await firebase.auth().signOut();
+      commit('setProfile', {});
     }
   },
   getters: {

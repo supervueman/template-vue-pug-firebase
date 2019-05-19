@@ -5,8 +5,17 @@
     )
       avatar(:imagePath="avatarPath")
       h3.name {{firstname}}
-    link-router(to="/signup" text="Sign Up" class="dark")
-    link-router(to="/signin" text="Sign In" class="dark")
+    link-router.dark(
+      to="/signup"
+      text="Sign Up"
+      v-if="profileId === '' || profileId === undefined"
+    )
+    link-router.dark(
+      to="/signin"
+      text="Sign In"
+      v-if="profileId === '' || profileId === undefined"
+    )
+    button.link(@click="logout" v-if="profileId !== '' && profileId !== undefined") Logout
 </template>
 
 <script>
@@ -22,6 +31,11 @@ export default {
     avatarPath: {
       type: String,
       default: "logo.png"
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("profile/logout");
     }
   }
 };

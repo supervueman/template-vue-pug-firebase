@@ -3,7 +3,7 @@
     toolbar(
       :firstname="profile.firstname"
       :avatarPath="`${staticImgBasePath}/${profile.avatar}`"
-      :profileId="profile.uid"
+      :profileId="profile.id"
     )
     router-view
     div {{profile}}
@@ -25,11 +25,6 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch("profile/fetchProfile");
-    // this.$store.dispatch("profile/signUp", {
-    //   email: "chaogen27@gmail.com",
-    //   password: "password",
-    //   name: "Rinat"
-    // });
   }
 };
 </script>

@@ -30,7 +30,6 @@ export default {
         });
 
         if (profile.exists) {
-          console.log(profile)
           const curProfile = profile.data();
           curProfile.id = profile.id;
           commit('setProfile', curProfile);
@@ -90,6 +89,19 @@ export default {
       await firebase.auth().signOut();
       localStorage.removeItem('uid');
       commit('setProfile', {});
+    },
+
+    /**
+     * @function updateProfile
+     * @async
+     * @param {Object} payload {firstname, lastname, age}
+     */
+    async updateProfile({
+      commit
+    }, payload) {
+      const response = await firebase.firestore().collection('users').doc(localStorage.getItem('uid')).set(payload, {
+        merge: true
+      });
     }
   },
   getters: {

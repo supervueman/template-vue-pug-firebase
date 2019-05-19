@@ -36,8 +36,9 @@ export default {
     }
   },
   methods: {
-    logout() {
-      this.$store.dispatch("profile/logout");
+    async logout() {
+      await this.$store.dispatch("profile/logout");
+      this.$router.push("/signin");
     }
   }
 };

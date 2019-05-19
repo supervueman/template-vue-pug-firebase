@@ -22,5 +22,10 @@ export default [{
     path: '/users',
     name: 'users',
     component: 'Users'
+  },
+  {
+    path: '/users/:slug',
+    name: 'user',
+    component: 'User'
   }
 ]

@@ -11,9 +11,15 @@ export default {
     }
   },
   actions: {
+    /**
+     * @function fetchUsers
+     * @async
+     * @var {Object} response
+     * @var {Array} users
+     */
     async fetchUsers({
       commit
-    }, payload) {
+    }) {
 
       const response = await firebase.firestore().collection("users").get().catch(err => {
         console.error(err);

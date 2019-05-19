@@ -1,0 +1,37 @@
+<template lang="pug">
+  div.link.d-flex.align-center.content-center
+    router-link.d-flex.align-center.content-center(:to="to") {{text}}
+</template>
+
+<script>
+export default {
+  props: {
+    to: {
+      type: String,
+      require: true,
+      default: "/"
+    },
+    text: {
+      type: String
+    }
+  }
+};
+</script>
+
+<style lang="sass">
+.link
+  a
+    font-size: 18px
+    height: 100%
+    margin: 0 20px
+    text-align: center
+.dark.link
+  a
+    color: #fff
+    background-color: #000
+.light.link
+  a
+    color: #000
+    background-color: #fff
+</style>
+

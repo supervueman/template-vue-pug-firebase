@@ -5,6 +5,8 @@
     )
       avatar(:imagePath="avatarPath")
       h3.name {{firstname}}
+    link-router(to="/signup" text="Sign Up" class="dark")
+    link-router(to="/signin" text="Sign In" class="dark")
 </template>
 
 <script>

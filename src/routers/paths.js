@@ -7,5 +7,15 @@ export default [{
     path: '/signup',
     name: 'signup',
     component: 'SignUp'
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: 'SignIn'
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: 'Profile'
   }
 ]

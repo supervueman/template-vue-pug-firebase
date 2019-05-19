@@ -1,4 +1,3 @@
 <template lang="pug">
-  div SignUp
-    
+  div
 </template>

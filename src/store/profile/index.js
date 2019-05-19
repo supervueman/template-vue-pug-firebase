@@ -24,15 +24,15 @@ export default {
       const isUid = uid !== undefined && uid !== null && uid !== '';
 
       if (isUid) {
-        const profile = await firebase.firestore().collection("users").doc(uid).get().catch(err => {
+        const response = await firebase.firestore().collection("users").doc(uid).get().catch(err => {
           console.error(err);
           return;
         });
 
-        if (profile.exists) {
-          const curProfile = profile.data();
-          curProfile.id = profile.id;
-          commit('setProfile', curProfile);
+        if (response.exists) {
+          const profile = response.data();
+          profile.id = response.id;
+          commit('setProfile', profile);
         }
       }
     },
@@ -47,15 +47,15 @@ export default {
     async signUp({
       commit
     }, payload) {
-      const createProfile = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password).catch(err => {
+      const response = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password).catch(err => {
         console.error(err);
         return;
       });
 
-      if (createProfile) {
-        localStorage.setItem('uid', createProfile.user.uid);
+      if (response) {
+        localStorage.setItem('uid', response.user.uid);
 
-        await firebase.firestore().collection("users").doc(createProfile.user.uid).set({
+        await firebase.firestore().collection("users").doc(response.user.uid).set({
           email: payload.email
         }).catch(err => {
           console.log(err);
@@ -75,12 +75,12 @@ export default {
     async signIn({
       commit
     }, payload) {
-      const authProfile = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(err => {
+      const response = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(err => {
         console.error(err);
       });
 
-      if (authProfile) {
-        localStorage.setItem('uid', authProfile.user.uid);
+      if (response) {
+        localStorage.setItem('uid', response.user.uid);
         await this.dispatch('profile/fetchProfile');
       }
     },

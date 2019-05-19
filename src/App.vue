@@ -1,28 +1,33 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  div(id="app")
+    toolbar(
+      :firstname="profile.firstname"
+      :avatarPath="`${staticImgBasePath}/${profile.avatar}`"
+    )
+    router-view
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import config from "@/config";
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: "app",
+  data() {
+    return {
+      staticImgBasePath: config.staticImgBasePath
+    };
+  },
+  computed: {
+    profile() {
+      return this.$store.getters["profile/getProfile"];
+    }
+  },
+  beforeCreate() {
+    this.$store.dispatch("profile/fetchProfile");
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+#app
+  padding: 80px 20px 0 20px
 </style>

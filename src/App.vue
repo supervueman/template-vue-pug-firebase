@@ -24,7 +24,7 @@ export default {
   beforeCreate() {
     this.$store.dispatch("profile/fetchProfile");
     // this.$store.dispatch("profile/signUp", {
-    //   email: "chaogen22@gmail.com",
+    //   email: "chaogen24@gmail.com",
     //   password: "password",
     //   name: "Rinat"
     // });

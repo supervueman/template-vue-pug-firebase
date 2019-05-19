@@ -23,6 +23,7 @@ export default {
     async fetchProfile({
       commit
     }) {
+      console.log(localStorage.getItem('uid'))
       firebase.firestore().collection("users").doc(localStorage.getItem('uid')).get().then(doc => {
         console.log(doc.data())
       }).catch(err => {
@@ -42,7 +43,7 @@ export default {
       if (createProfile) {
         localStorage.setItem('uid', createProfile.user.uid);
 
-        const profile = await firebase.firestore().collection("users").add(payload).catch(err => {
+        const profile = await firebase.firestore().collection("users").doc(createProfile.user.uid).set(payload).catch(err => {
           console.log(err);
           return;
         });

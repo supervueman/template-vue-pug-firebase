@@ -26,9 +26,11 @@ export default {
       if (isUid) {
         const profile = await firebase.firestore().collection("users").doc(uid).get().catch(err => {
           console.error(err);
+          return;
         });
 
-        if (profile) {
+        if (profile.exists) {
+          console.log(profile)
           const curProfile = profile.data();
           curProfile.id = profile.id;
           commit('setProfile', curProfile);

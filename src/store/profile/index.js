@@ -35,7 +35,7 @@ export default {
 
       if (profile) {
         const curProfile = profile.data();
-        curProfile.id = profile.id
+        curProfile.id = profile.id;
         commit('setProfile', curProfile);
       }
     },
@@ -67,17 +67,23 @@ export default {
       }
     },
 
+    /**
+     * @function signIn
+     * @async
+     * @param {Object} payload {email, password}
+     * @var {Object} authProfile
+     */
     async signIn({
       commit
     }, payload) {
-      const profile = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(err => {
+      const authProfile = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(err => {
         console.error(err);
       });
 
-      console.log(profile)
-
-      localStorage.setItem('uid', profile.uid);
-      // commit('setProfile', profile);
+      if (authProfile) {
+        localStorage.setItem('uid', authProfile.user.uid);
+        await this.dispatch('profile/fetchProfile');
+      }
     },
 
     async logout({

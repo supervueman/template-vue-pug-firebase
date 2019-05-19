@@ -17,7 +17,10 @@ export default {
   methods: {
     signin() {
       if (this.email !== "" && this.password !== "") {
-        this.$store.dispatch("profile/signIn");
+        this.$store.dispatch("profile/signIn", {
+          email: this.email,
+          password: this.password
+        });
       }
     }
   }

@@ -20,17 +20,24 @@ export default {
     }
   },
   actions: {
+    /**
+     * @function fetchProfile
+     * @async
+     * @var {Object} profile
+     * @var {Object} curProfile
+     */
     async fetchProfile({
       commit
     }) {
-      console.log(localStorage.getItem('uid'))
-      firebase.firestore().collection("users").doc(localStorage.getItem('uid')).get().then(doc => {
-        console.log(doc.data())
-      }).catch(err => {
+      const profile = await firebase.firestore().collection("users").doc(localStorage.getItem('uid')).get().catch(err => {
         console.log(err);
       });
-      // console.log(profile, '____Profile')
-      // commit('setProfile', profile);
+
+      if (profile) {
+        const curProfile = profile.data();
+        curProfile.id = profile.id
+        commit('setProfile', curProfile);
+      }
     },
 
     /**
@@ -51,12 +58,10 @@ export default {
       if (createProfile) {
         localStorage.setItem('uid', createProfile.user.uid);
 
-        const profile = await firebase.firestore().collection("users").doc(createProfile.user.uid).set(payload).catch(err => {
+        await firebase.firestore().collection("users").doc(createProfile.user.uid).set(payload).catch(err => {
           console.log(err);
           return;
         });
-
-        commit('setProfile', profile);
       }
     },
 

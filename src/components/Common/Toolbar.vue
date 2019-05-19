@@ -1,13 +1,18 @@
 <template lang="pug">
   header.toolbar.d-flex.content-end
-    h3.toolbar-menu.d-flex.content-center.align-center
+    div.toolbar-menu.d-flex.content-center.align-center(
+      v-if="profileId !== undefined && profileId !== ''"
+    )
       avatar(:imagePath="avatarPath")
-      div.name {{firstname}}
+      h3.name {{firstname}}
 </template>
 
 <script>
 export default {
   props: {
+    profileId: {
+      type: String
+    },
     firstname: {
       type: String,
       default: "Vue"

@@ -1,22 +1,30 @@
 <template lang="pug">
-  header.toolbar.d-flex.content-end
-    router-link.toolbar-menu.d-flex.content-center.align-center(
-      to="/profile"
-      v-if="profileId !== undefined && profileId !== ''"
-    )
-      avatar(:imagePath="avatarPath")
-      h3.name {{firstname}}
-    link-router.dark(
-      to="/signup"
-      text="Sign Up"
-      v-if="profileId === '' || profileId === undefined"
-    )
-    link-router.dark(
-      to="/signin"
-      text="Sign In"
-      v-if="profileId === '' || profileId === undefined"
-    )
-    button.link(@click="logout" v-if="profileId !== '' && profileId !== undefined") Logout
+  header.toolbar.d-flex.content-sb
+    div.d-flex
+      link-router.dark(
+        to="/users"
+        text="users"
+        v-if="profileId !== undefined && profileId !== ''"
+      )
+    div.d-flex
+      router-link.toolbar-menu.d-flex.content-center.align-center(
+        to="/profile"
+        v-if="profileId !== undefined && profileId !== ''"
+      )
+        avatar(:imagePath="avatarPath")
+        h3.name {{firstname}}
+      link-router.dark(
+        to="/signup"
+        text="Sign Up"
+        v-if="profileId === '' || profileId === undefined"
+      )
+      link-router.dark(
+        to="/signin"
+        text="Sign In"
+        v-if="profileId === '' || profileId === undefined"
+      )
+      button.link(@click="logout" v-if="profileId !== '' && profileId !== undefined") Logout
+    
 </template>
 
 <script>

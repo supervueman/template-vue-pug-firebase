@@ -32,6 +32,14 @@ export default {
       // console.log(profile, '____Profile')
       // commit('setProfile', profile);
     },
+
+    /**
+     * @function signUp
+     * @async
+     * @param {Object} payload {email, password}
+     * @var {Object} createProfile
+     * @var {Object} profile
+     */
     async signUp({
       commit
     }, payload) {
